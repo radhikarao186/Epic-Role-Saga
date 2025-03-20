@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h1>EPIC ROLL SAGA</h1>
+
+    <style>
+        .container {
+            width: 70%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .dice {
+            text-align: center;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        body {
+            background-color:slateblue;
+            margin: 0;
+        }
+
+        h1 {
+            margin: 30px;
+            font-family: "Lobster", cursive;
+            text-shadow: 5px 0 #232931;
+            font-size: 4.5rem;
+            color:  black;
+            text-align: center;
+        }
+h2 {
+            margin: 30px;
+            font-family: "Lobster", cursive;
+            text-shadow: 5px 0 #232931;
+            font-size: 4.5rem;
+            color:  tomato;
+            text-align: center;
+        }
+
+
+        p {
+            font-size: 2rem;
+            color: pink;
+            font-family: "Indie Flower", cursive;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .bottom {
+            padding-top: 30px;
+        }
+
+        .butn {
+            background: yellow;
+            font-family: "Indie Flower", cursive;
+            border-radius: 7px;
+            color: blue;
+            font-size: 30px;
+            padding: 16px 25px 16px 25px;
+            text-decoration: none;
+        }
+
+        .butn:hover {
+            background: Gray;
+            text-decoration: none;
+        }
+
+        table {
+            width: 100%;
+            margin: 50px 0;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 5px solid maroon;
+            color: black;
+            font-family: "Lobster", cursive;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Let's Play</h2>
+
+        <div class="dice">
+            <p class="Player1">Player 1</p>
+            <img class="img1" src="dice6.png">
+        </div>
+
+        <div class="dice">
+            <p class="Player2">Player 2</p>
+            <img class="img2" src="dice6.png">
+        </div>
+    </div>
+
+    <div class="container bottom">
+        <button type="button" class="butn" onClick="rollTheDice()">
+            Roll the Dice
+        </button>
+    </div>
+    <div class="container bottom">
+        <button type="button" class="butn" onClick="editNames()">
+            Edit Names
+        </button>
+    </div>
+
+    <div class="container">
+        <table id="scoreTable">
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Winner</th>
+                    <th>Loser</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Score rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var player1 = "Player 1";
+        var player2 = "Player 2";
+        var gameCount = 0;
+
+        function editNames() {
+            player1 = prompt("Change Player1 name") || player1;
+            player2 = prompt("Change player2 name") || player2;
+
+            document.querySelector("p.Player1").innerHTML = player1;
+            document.querySelector("p.Player2").innerHTML = player2;
+        }
+
+        function rollTheDice() {
+            setTimeout(function () {
+                var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+                var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+
+                document.querySelector(".img1").setAttribute("src",
+                    "dice" + randomNumber1 + ".png");
+
+                document.querySelector(".img2").setAttribute("src",
+                    "dice" + randomNumber2 + ".png");
+
+                var winner, loser;
+                if (randomNumber1 === randomNumber2) {
+                    document.querySelector("h2").innerHTML = "Draw!";
+                    winner = "Draw";
+                    loser = "Draw";
+                } else if (randomNumber1 < randomNumber2) {
+                    document.querySelector("h2").innerHTML = player2 + " WINS!";
+                    winner = player2;
+                    loser = player1;
+                } else {
+                    document.querySelector("h2").innerHTML = player1 + " WINS!";
+                    winner = player1;
+                    loser = player2;
+                }
+
+                updateScoreTable(winner, loser);
+            }, 2500);
+        }
+
+        function updateScoreTable(winner, loser) {
+            gameCount++;
+            var table = document.getElementById("scoreTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+
+            cell1.innerHTML = gameCount;
+            cell2.innerHTML = winner;
+            cell3.innerHTML = loser;
+        }
+    </script>
+</body>
+
+</html>
