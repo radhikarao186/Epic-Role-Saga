@@ -1,2 +1,1 @@
 # Epic-Role-Saga
-Developed an interactive web-based dice game with HTML, CSS, and JavaScript, giving a dynamic and interactive user experience. The game includes real-time scoring, enabling users to view their score after every round. Users can personalize player names by using a prompt input for an enhanced experience. The UI is responsive-styled to ensure smooth gaming on various screen sizes and devices. JavaScript is used for game logic, scoring, and user interaction, thus ensuring the gameplay is intuitive and smooth.
